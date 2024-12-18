@@ -5,6 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.javapracticalblock.huffman_algorithm.HuffmanAlgorithm
+import java.util.Collections
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,5 +18,20 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        startHuffmanAlgorithm()
+    }
+
+    private fun startHuffmanAlgorithm() {
+        val input = "huffman coding example"
+
+        val (encodedString, codes) = HuffmanAlgorithm.encode(input)
+        println("Original String: $input")
+        println("Encoded String: $encodedString")
+        println("Huffman Codes: $codes")
+
+        val root = HuffmanAlgorithm.buildHuffmanTree(HuffmanAlgorithm.calculateFrequency(input))
+
+        val decodedString = HuffmanAlgorithm.decode(encodedString, root)
+        println("Decoded String: $decodedString")
     }
 }
